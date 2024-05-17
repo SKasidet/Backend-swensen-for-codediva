@@ -17,6 +17,10 @@ db.sequelize = sequelize;
 
 
 db.user = require('./model/user')(sequelize, Sequelize)
+db.category = require('./model/category')(sequelize, Sequelize)
+db.product = require('./model/product')(sequelize, Sequelize)
 
+db.product.belongsTo(db.category);
+db.category.hasMany(db.product);
 
 module.exports = db;
