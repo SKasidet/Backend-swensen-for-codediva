@@ -1,8 +1,9 @@
 module.exports = {
     indexpage: async (req, res) => {
       try {
-        const data = await db.product.findAll();
+        const data = await db.product.findAll({include:[{model:db.category,attribute:['name']}]});
         const formattedCategories = data.map((item) => item.dataValues);
+        console.log(formattedCategories)
         res.render("product-index", { categories: formattedCategories });
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -43,7 +44,7 @@ module.exports = {
           name: req.body.name,
           description: req.body.description,
           price: req.body.price,
-          category_Id: req.body.category_id
+          categoryId: req.body.category_Id
         })
         .then((result) => res.send(result))
         .catch((err) => res.send(err));
