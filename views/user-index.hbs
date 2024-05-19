@@ -1,0 +1,73 @@
+<body>
+
+    <div class="content" style="width: 100%;">
+
+        <div class="intro-y box">
+            <div class="p-5" id="head-options-table">
+                <div class="overflow-x-auto">
+                    <div class="hidden md:block mx-auto text-slate-500"><b>Showing entries</b></div>
+                    <table class="table">
+                        <thead class="" style="background-color: #e8ecef;">
+                            <tr>
+                                <th style="width:15%;" class="text-center">ชื่อ</th>
+                                <th style="width:15%;" class="text-center">นามสกุล</th>
+                                <th style="width:15%;" class="text-center">อีเมล</th>
+                                <th style="width:15%;" class="text-center">เบอร์โทร</th>
+                                <th style="width:15%;" class="text-center">เพศ</th>
+                                <th style="width:15%;" class="text-center">วันเกิด</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each categories}}
+                            <tr>
+
+                                <td class="text-center">{{this.name}}</td>
+                                <td class="text-center">{{this.lastname}}</td>
+                                <td class="text-center">{{this.email}}</td>
+                                <td class="text-center">{{this.tel}}</td>
+                                <td class="text-center">{{this.gender}}</td>
+                                <td class="text-center">{{this.birthday}}</td>
+
+                            </tr>
+                            {{else}}
+                            <tr>
+                                <td colspan="7" class="text-center">- No items -</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <div class="table-footer mt-2">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <p style=" ">
+                                    <!-- Additional content if needed -->
+                                </p>
+                            </div>
+                            <div class="col-sm-7">
+                                {{pagination}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+function deleteuser(id) {
+            fetch(`/user/delete/${id}`, { method: 'DELETE' }).then(response => {
+                if
+                    (response.ok) { // Handle successful deletion location.reload(); // or
+    update UI accordingly
+                } else { // Handle error response console.error('Error
+    deleting user: ', response.statusText); } }).catch(error => { // Handle
+    network error console.error('Network error:', error);
+                });
+        }
+
+    </script>
+</body>

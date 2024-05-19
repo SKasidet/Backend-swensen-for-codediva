@@ -1,0 +1,85 @@
+<body>
+
+    <div class="content" style="width: 100%;">
+        <div class="intro-y flex flex-col sm:flex-row items-center mt-8 mb-2">
+            <div class="w-full sm:w-auto flex mt-4 sm:mt-0" style="text-align: right;">
+                <a href="/category/create" class="btn btn-primary shadow-md mr-2">+
+                    เพิ่มข้อมูล</a>
+
+            </div>
+        </div>
+
+        <div class="intro-y box">
+            <div class="p-5" id="head-options-table">
+                <div class="overflow-x-auto">
+                    <div class="hidden md:block mx-auto text-slate-500"><b>Showing entries</b></div>
+                    <table class="table">
+                        <thead class="" style="background-color: #e8ecef;">
+                            <tr>
+                                <th style="width:35%;" class="text-center">ชื่อ</th>
+                                <th style="width:15%;" class="text-center">คำอธิบาย</th>
+                                <th style="width:15%;" class="text-center">แก้ไข</th>
+                                <th style="width:15%;" class="text-center">ลบ</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each categories}}
+                            <tr>
+
+                                <td class="text-center">{{this.name}}</td>
+                                <td class="text-center">{{this.description}}</td>
+                                <td class="text-center">
+                                     <a class="btn btn-outline-warning w-24 mr-1" href="/category/edit/{{this.id}}">แก้ไข</a>
+
+                                </td>
+
+                                <td class="text-center">
+                                    <form action="/category/delete/{{this.id}}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        <button type="submit" class="btn btn-danger shadow-md mr-2">ลบ</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {{else}}
+                            <tr>
+                                <td colspan="7" class="text-center">- No items -</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <div class="table-footer mt-2">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <p style=" ">
+                                    <!-- Additional content if needed -->
+                                </p>
+                            </div>
+                            <div class="col-sm-7">
+                                {{pagination}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+function deleteCategory(id) {
+            fetch(`/category/delete/${id}`, { method: 'DELETE' }).then(response => {
+                if
+                    (response.ok) { // Handle successful deletion location.reload(); // or
+    update UI accordingly
+                } else { // Handle error response console.error('Error
+    deleting category: ', response.statusText); } }).catch(error => { // Handle
+    network error console.error('Network error:', error);
+                });
+        }
+
+    </script>
+</body>

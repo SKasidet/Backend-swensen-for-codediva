@@ -3,8 +3,10 @@ const auth = require('../controller/auth')
 const router = express.Router()
 
 
+router.get('/', auth.indexpage)
 
-
+router.get('/login', auth.loginpage)
+router.get('/register', auth.registerpage)
 
 router.post('/login', auth.login)
 router.post('/register', auth.create)

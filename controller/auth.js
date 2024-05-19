@@ -2,6 +2,22 @@ const bcrypt = require("bcryptjs");
 // const jwt = require('jsonwebtoken')
 
 module.exports = {
+  loginpage: (req, res) => {    
+    res.render("login");
+  },
+  registerpage: (req, res) => {    
+    res.render("register");
+  },
+  indexpage: async (req, res) => {
+    try {
+      const data = await db.user.findAll();
+      const formattedCategories = data.map((item) => item.dataValues);
+      res.render("user-index", { categories: formattedCategories });
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  },
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -41,6 +57,7 @@ module.exports = {
       .catch((err) => res.send(err));
   },
   create: async (req, res) => {
+    try{
     const user = await db.user.findOne({ where: { email: req.body.email } });
     // console.log(user)
     if (user !== null)
@@ -59,11 +76,14 @@ module.exports = {
           birthday: req.body.birthday,
           acceptnews: req.body.acceptnews,
         })
-        .then((result) => res.send(result))
-        .catch((err) => res.send(err));
+        .then((result) => res.status(200).json({ message: "ล็อกอินสำเร็จ" }))
+        .catch((err) => res.status(409).send(err));
     } else {
       res.send("กรอกรหัสผ่าน");
     }
+  } catch (error) {
+            return res.status(409).json({ message: "ล็อกอินสำเร็จ" });
+  }
   },
 
   //   update: async (req, res) => {

@@ -8,7 +8,8 @@ module.exports = (sequelize, Sequelize) => {
         tel: { type: Sequelize.INTEGER(10), allowNull: false },
         gender: { type: Sequelize.STRING(10), allowNull: false},
         birthday: { type: Sequelize.DATE,  allowNull: false },
-        acceptnews: { type: Sequelize.BOOLEAN,  allowNull: false },
+        acceptrule: { type: Sequelize.STRING(10) },
+        acceptnews: { type: Sequelize.STRING(10) },
     }, {
         tablename: "user"
     })
